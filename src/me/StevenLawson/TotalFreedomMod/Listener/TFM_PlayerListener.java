@@ -722,7 +722,7 @@ public class TFM_PlayerListener implements Listener
             {
                 if (TFM_AdminList.isSuperAdmin(pl) && TFM_PlayerData.getPlayerData(pl).cmdspyEnabled())
                 {
-                    TFM_Util.playerMsg(pl, player.getName() + ": " + command);
+                    TFM_Util.playerMsg(pl, player.getName() + " - Command: " + command);
                 }
             }
         }
