@@ -193,8 +193,8 @@ public class Command_admin extends TFM_Command
         CLEAN("clean", AdminLevel.SENIOR, SourceType.BOTH, 1, 1),
         CLEARME("clearme", AdminLevel.SUPER, SourceType.ONLY_IN_GAME, 1, 2),
         INFO("info", AdminLevel.SUPER, SourceType.BOTH, 2, 2),
-        ADD("add", AdminLevel.SUPER, SourceType.SENIOR, 2, 2),
-        DELETE("delete", AdminLevel.SENIOR, SourceType.SENIOR, 2, 2);
+        ADD("add", AdminLevel.SUPER, SourceType.BOTH, 2, 2),
+        DELETE("delete", AdminLevel.SENIOR, SourceType.BOTH, 2, 2);
         private final String modeName;
         private final AdminLevel adminLevel;
         private final SourceType sourceType;
