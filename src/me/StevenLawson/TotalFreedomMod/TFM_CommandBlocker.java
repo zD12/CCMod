@@ -275,7 +275,7 @@ public class TFM_CommandBlocker
             this.action = action;
             this.command = command;
             this.subCommand = (subCommand == null ? null : subCommand.toLowerCase().trim());
-            this.message = (message == null || message.equals("_") ? "That command is blocked." : message);
+            this.message = (message == null || message.equals("_") ? "I'm sorry, CaekCraft does not allow that command!" : message);
         }
 
         public CommandBlockerAction getAction()
