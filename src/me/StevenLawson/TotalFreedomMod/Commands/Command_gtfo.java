@@ -43,17 +43,18 @@ public class Command_gtfo extends TFM_Command
 
         TFM_Util.bcastMsg(player.getName() + " has been a VERY naughty, naughty boy.", ChatColor.RED);
 
+        server.dispatchCommand(sender, "co rb u:" + player.getName() + " t:24h r:global #silent");
         // Undo WorldEdits:
-        try
+/*        try
         {
             TFM_WorldEditBridge.undo(player, 15);
         }
         catch (NoClassDefFoundError ex)
         {
-        }
+        } */
 
         // rollback
-        TFM_RollbackManager.rollback(player.getName());
+/*        TFM_RollbackManager.rollback(player.getName()); */
 
         // deop
         player.setOp(false);
