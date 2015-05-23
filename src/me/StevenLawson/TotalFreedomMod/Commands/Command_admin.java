@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 
 @CommandPermissions(level = AdminLevel.OP, source = SourceType.BOTH)
 @CommandParameters(description = "Manage superadmins.", usage = "/<command> <list | clean | clearme [ip] | <add | delete | info> <username>>")
-public class Command_saconfig extends TFM_Command
+public class Command_admin extends TFM_Command
 {
     @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
@@ -47,9 +47,9 @@ public class Command_saconfig extends TFM_Command
             }
             case CLEAN:
             {
-                TFM_Util.adminAction(sender.getName(), "Cleaning superadmin list", true);
+                TFM_Util.adminAction(sender.getName(), "Cleaning the admin list", true);
                 TFM_AdminList.cleanSuperadminList(true);
-                playerMsg("Superadmins: " + StringUtils.join(TFM_AdminList.getSuperNames(), ", "), ChatColor.YELLOW);
+                playerMsg("Admins: " + StringUtils.join(TFM_AdminList.getSuperNames(), ", "), ChatColor.YELLOW);
 
                 break;
             }
@@ -61,7 +61,7 @@ public class Command_saconfig extends TFM_Command
 
                 if (args.length == 1)
                 {
-                    TFM_Util.adminAction(sender.getName(), "Cleaning my supered IPs", true);
+                    TFM_Util.adminAction(sender.getName(), "Cleaning my admin IPs", true);
 
                     int counter = admin.getIps().size() - 1;
                     admin.clearIPs();
@@ -84,7 +84,7 @@ public class Command_saconfig extends TFM_Command
                     }
                     else
                     {
-                        TFM_Util.adminAction(sender.getName(), "Removing a supered IP", true);
+                        TFM_Util.adminAction(sender.getName(), "Removing an admin IP", true);
 
                         admin.removeIp(args[1]);
 
@@ -112,7 +112,7 @@ public class Command_saconfig extends TFM_Command
 
                 if (superadmin == null)
                 {
-                    playerMsg("Superadmin not found: " + args[1]);
+                    playerMsg("Admin not found: " + args[1]);
                 }
                 else
                 {
@@ -138,7 +138,7 @@ public class Command_saconfig extends TFM_Command
                     player = TFM_DepreciationAggregator.getOfflinePlayer(server, superadmin.getLastLoginName());
                 }
 
-                TFM_Util.adminAction(sender.getName(), "Adding " + player.getName() + " to the superadmin list", true);
+                TFM_Util.adminAction(sender.getName(), "giving " + player.getName() + " clearance level 1 as an admin ", true);
                 TFM_AdminList.addSuperadmin(player);
 
                 if (player.isOnline())
@@ -167,11 +167,11 @@ public class Command_saconfig extends TFM_Command
 
                 if (!TFM_AdminList.getLowercaseSuperNames().contains(targetName.toLowerCase()))
                 {
-                    playerMsg("Superadmin not found: " + targetName);
+                    playerMsg("Admin not found: " + targetName);
                     return true;
                 }
 
-                TFM_Util.adminAction(sender.getName(), "Removing " + targetName + " from the superadmin list", true);
+                TFM_Util.adminAction(sender.getName(), "Revoking " + targetName + "'s admin clearance", true);
                 TFM_AdminList.removeSuperadmin(TFM_DepreciationAggregator.getOfflinePlayer(server, targetName));
 
                 // Twitterbot
@@ -193,8 +193,8 @@ public class Command_saconfig extends TFM_Command
         CLEAN("clean", AdminLevel.SENIOR, SourceType.BOTH, 1, 1),
         CLEARME("clearme", AdminLevel.SUPER, SourceType.ONLY_IN_GAME, 1, 2),
         INFO("info", AdminLevel.SUPER, SourceType.BOTH, 2, 2),
-        ADD("add", AdminLevel.SUPER, SourceType.ONLY_CONSOLE, 2, 2),
-        DELETE("delete", AdminLevel.SENIOR, SourceType.ONLY_CONSOLE, 2, 2);
+        ADD("add", AdminLevel.SUPER, SourceType.SENIOR, 2, 2),
+        DELETE("delete", AdminLevel.SENIOR, SourceType.SENIOR, 2, 2);
         private final String modeName;
         private final AdminLevel adminLevel;
         private final SourceType sourceType;
