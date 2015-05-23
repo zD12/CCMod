@@ -68,7 +68,7 @@ public class TFM_Util
     public static final Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
     // See https://github.com/TotalFreedom/License - None of the listed names may be removed.
     public static final List<String> DEVELOPERS = Arrays.asList("Madgeek1450", "Scuph", "Prozza", "DarthSalmon", "AcidicCyanide", "Wild1145", "WickedGamingUK");
-    public static final List<String> EXECS = Arrays.asList("ImALuckyGuy", "Copycat138");
+    public static final List<String> EXECS = Arrays.asList("ImALuckyGuy", "Copycat138", "BakuSystems");
     public static final List<String> SECURITY = Arrays.asList("Fezx");
     public static final List<String> OWNERS = Arrays.asList("Dyxi");
     private static final Random RANDOM = new Random();
