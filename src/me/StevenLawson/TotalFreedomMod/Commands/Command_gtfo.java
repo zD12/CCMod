@@ -5,9 +5,9 @@ import me.StevenLawson.TotalFreedomMod.TFM_Ban;
 import me.StevenLawson.TotalFreedomMod.TFM_BanManager;
 import me.StevenLawson.TotalFreedomMod.TFM_RollbackManager;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
-import me.StevenLawson.TotalFreedomMod.TFM_UuidManager;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
+import net.minecraft.util.org.apache.commons.lang3.ArrayUtils;
+import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -31,7 +31,7 @@ public class Command_gtfo extends TFM_Command
 
         if (player == null)
         {
-            playerMsg(TFM_Command.PLAYER_NOT_FOUND, ChatColor.RED);
+            playerMsg(TotalFreedomMod.PLAYER_NOT_FOUND, ChatColor.RED);
             return true;
         }
 
@@ -41,10 +41,16 @@ public class Command_gtfo extends TFM_Command
             reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
         }
 
-        TFM_Util.bcastMsg(player.getName() + " has been a VERY naughty, naughty boy.", ChatColor.RED);
-
+        TFM_Util.bcastMsg(player.getName() + " has been a VERY naughty, naughty person.", ChatColor.RED);
+        
+        // Silently rollback the user with CoreProtect
+        server.dispatchCommand(sender, "co rb u:" + player.getName() + " t:24h r:global #silent");
+        
+        
+        // Disabled TFM RollbackManager and WorldEdit undones due to Coreprotect is handle it now.
         // Undo WorldEdits:
-        try
+       
+ /*       try
         {
             TFM_WorldEditBridge.undo(player, 15);
         }
@@ -54,7 +60,7 @@ public class Command_gtfo extends TFM_Command
 
         // rollback
         TFM_RollbackManager.rollback(player.getName());
-
+*/
         // deop
         player.setOp(false);
 
@@ -77,28 +83,15 @@ public class Command_gtfo extends TFM_Command
 
         // ban IP address:
         String ip = TFM_Util.getFuzzyIp(player.getAddress().getAddress().getHostAddress());
-
-        final StringBuilder bcast = new StringBuilder()
-                .append(ChatColor.RED)
-                .append("Banning: ")
-                .append(player.getName())
-                .append(", IP: ")
-                .append(ip);
-
-        if (reason != null)
-        {
-            bcast.append(" - Reason: ").append(ChatColor.YELLOW).append(reason);
-        }
-
-        TFM_Util.bcastMsg(bcast.toString());
+        TFM_Util.bcastMsg(String.format("Banning: %s, IP: %s ", player.getName(), ip) + (reason != null ? ("- Reason: " + ChatColor.YELLOW + reason) : ""), ChatColor.RED);
 
         TFM_BanManager.addIpBan(new TFM_Ban(ip, player.getName(), sender.getName(), null, reason));
 
         // ban username:
-        TFM_BanManager.addUuidBan(new TFM_Ban(TFM_UuidManager.getUniqueId(player), player.getName(), sender.getName(), null, reason));
+        TFM_BanManager.addUuidBan(new TFM_Ban(TFM_Util.getUuid(player), player.getName(), sender.getName(), null, reason));
 
         // kick Player:
-        player.kickPlayer(ChatColor.RED + "GTFO" + (reason != null ? ("\nReason: " + ChatColor.YELLOW + reason) : "") + " - " + sender.getName());
+        player.kickPlayer(ChatColor.RED + "GTFO" + (reason != null ? ("\nReason: " + ChatColor.YELLOW + reason) : ""));
 
         return true;
     }
