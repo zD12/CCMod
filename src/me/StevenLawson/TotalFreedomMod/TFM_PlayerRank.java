@@ -3,6 +3,7 @@ package me.StevenLawson.TotalFreedomMod;
 import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import static me.StevenLawson.TotalFreedomMod.TFM_Util.DEVELOPERS;
 import static me.StevenLawson.TotalFreedomMod.TFM_Util.EXECS;
+import static me.StevenLawson.TotalFreedomMod.TFM_Util.SECURITYOFFICERS;
 import static me.StevenLawson.TotalFreedomMod.TFM_Util.OWNERS;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -19,6 +20,7 @@ public enum TFM_PlayerRank
     SENIOR("a " + ChatColor.RED + "Senior Admin", ChatColor.RED + "[SrA]"),
     OWNER("the " + ChatColor.BLUE + "Owner", ChatColor.BLUE + "[Owner]"),
     CONSOLE("The " + ChatColor.DARK_PURPLE + "Console", ChatColor.DARK_PURPLE + "[Console]"),
+    SECURITYOFFICER("The " + ChatColor.AQUA + "Security Officer", ChatColor.AQUA + "[Security]"),
     EXEC("an ") + ChatColor.DARK_RED + "Executive", ChatColor.DARK_RED + "[Executive]");
     private final String loginMessage;
     private final String prefix;
