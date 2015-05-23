@@ -1,8 +1,8 @@
-name: TotalFreedomMod
+name: CCMod
 main: me.StevenLawson.TotalFreedomMod.TotalFreedomMod
-version: 4.3
+version: 1.0
 description: Plugin for the Total Freedom server.
-softdepend: [BukkitTelnet, WorldEdit, Essentials]
-authors: [Madgeek1450, Prozza]
+softdepend: [BukkitTelnet, WorldEdit, Essentials, CoreProtect]
+authors: [Madgeek1450, Prozza, Scuph, ImALuckyGuy]
 
 # plugin.yml is no longer used to define commands.
